@@ -17,6 +17,9 @@ import IosSwitchMaterialUi from 'ios-switch-material-ui';
 import {
     Brightness4Outlined as ToggleDarkModeIcon,
 } from '@material-ui/icons/';
+import Account from "./Account";
+import { useWeb3React } from "@web3-react/core";
+import useEagerConnect from "../../hooks/useEagerConnect";
 
 const navigationLinks = [
   { name: "Trade", href: "/trade" },
@@ -70,16 +73,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ConnectWallet = dynamic(() => import('./ConnectWallet'), {
-    ssr: false,
-});
+// const ConnectWallet = dynamic(() => import('./Account'), {
+//     ssr: false,
+// });
 
 export default function Header({ toggleMode, darkMode }) {
 
   const theme = useTheme();
   const styles = useStyles();
   const [open, setOpen] = useState(false);
-  const [balance, setBalance] = useState()
+  const triedToEagerConnect = useEagerConnect();
 
 
   return (
@@ -113,7 +116,7 @@ export default function Header({ toggleMode, darkMode }) {
                     </Hidden>
                 </div>
                 <Hidden xsDown>
-                    <ConnectWallet />
+                    <Account triedToEagerConnect={triedToEagerConnect} />
                     {darkMode ? (
                         <ToggleDarkModeIcon htmlColor={theme.custom.palette.iconColor} className={styles.mgRight} />
                     ) : (
