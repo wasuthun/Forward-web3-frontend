@@ -37,7 +37,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <React.Fragment>
       <Head>
-        <title>Nextjs Web3 starter</title>
+        <title>Forward Market</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"

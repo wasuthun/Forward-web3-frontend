@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#ee6f57" />
           {/* Template by https://amanraj.dev/ */}
 
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="shortcut icon" href="/logo.png" />
           <link rel="apple-touch-icon" href="/icons/logo.png" />
           <meta name="theme-color" content="#000000" />
 
