@@ -10,7 +10,7 @@ import useTokenBalance from "../../hooks/useTokenBalance";
 import { parseBalance } from "../../util";
 
 const Account = ({ triedToEagerConnect }) => {
-  const { active, error, activate, chainId, account, setError } = useWeb3React();
+  const { active, error, activate, chainId, account, setError, deactivate } = useWeb3React();
   const classes = useStyles();
   const [balance, setBalance] = useState(0);
   const  { data }  = useTokenBalance(account, '0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee');
@@ -79,7 +79,12 @@ const Account = ({ triedToEagerConnect }) => {
     >
     {account &&
       (
-        <div className={classes.imgLayout}>
+        <div
+          onClick={() => {
+            setConnecting(false);
+            deactivate();
+          }}
+          className={classes.imgLayout}>
           <img 
             src="/icons/Ellipse.png"
             className={classes.iconEclipes}

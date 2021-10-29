@@ -37,7 +37,6 @@ const App = ({ Component, pageProps }) => {
 
   const muiTheme = darkMode ? lightTheme : darkTheme;
 
-  console.log(muiTheme)
   return (
     <React.Fragment>
       <Head>

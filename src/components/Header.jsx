@@ -12,13 +12,11 @@ import Divider from "@material-ui/core/Divider";
 import CloseIcon from '@material-ui/icons/Close';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import dynamic from 'next/dynamic';
 import IosSwitchMaterialUi from 'ios-switch-material-ui';
 import {
     Brightness4Outlined as ToggleDarkModeIcon,
 } from '@material-ui/icons/';
 import Account from "./Account";
-import { useWeb3React } from "@web3-react/core";
 import useEagerConnect from "../../hooks/useEagerConnect";
 
 const navigationLinks = [
