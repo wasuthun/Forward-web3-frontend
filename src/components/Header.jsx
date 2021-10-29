@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   customSide: {
     width:'100vw',
     height: '100vh',
-    backgroundColor: theme.type=='dark'?'black': 'white'
+    backgroundColor: theme.type=='dark'?'black': 'white',
   },
   customIcon: {
     color: theme.type=='dark'?'white': 'black'
@@ -88,7 +88,7 @@ export default function Header({ toggleMode, darkMode }) {
   const triedToEagerConnect = useEagerConnect();
 
   return (
-    <AppBar elevation={0}>
+    <AppBar style={{ background: darkMode? 'white': 'black' }} elevation={0}>
       <Container maxWidth={false}>
         <ToolBar disableGutters>
             <Hidden mdUp>
@@ -109,7 +109,7 @@ export default function Header({ toggleMode, darkMode }) {
                 <Hidden mdDown>
                     {navigationLinks.map((item) => (
                     <Link
-                        className={styles.link}
+                        className={`${styles.link} ${styles.customIcon}`}
                         color="textPrimary"
                         variant="button"
                         underline="none"
@@ -156,7 +156,7 @@ export default function Header({ toggleMode, darkMode }) {
             {navigationLinks.map((item) => (
                 <ListItem key={item.name} className={styles.linkSide}>
                 <Link
-                    color="textPrimary"
+                    className={styles.customIcon}
                     variant="button"
                     underline="none"
                     href={item.href}

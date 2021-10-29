@@ -10,7 +10,7 @@ const Index = () => {
   return (
     <main className={classes.main}>
       <div>
-        <Typography variant="h6">
+        <Typography className={classes.fontColor} variant="h6">
           Trade
         </Typography>
       </div>
@@ -19,15 +19,24 @@ const Index = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-    width: '100%',
-    marginTop: '15vh',
-    textAlign: 'center',
-    height: '100vh'
-  },
-  text: {
-    fontSize: 18,
-  }
+    main: {
+        width: '100%',
+        paddingTop: '15vh',
+        textAlign: 'center',
+        height: '100vh',
+        backgroundColor: theme.type=='dark'? 'black': 'white',
+        colors: theme.type=='dark'? 'white': 'black',
+        backgroundImage: "url(/img/background.png)",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPositionY: 'bottom',
+    },
+    text: {
+        fontSize: 18,
+    },
+    fontColor: {
+        color: theme.type=='dark'? 'white': 'black'
+    }
 }));
 
 export default Index;

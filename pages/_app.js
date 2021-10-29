@@ -8,6 +8,7 @@ import { darkTheme, lightTheme } from '../src/utils/theme';
 import Header from '../src/components/Header';
 import { Web3ReactProvider } from "@web3-react/core";
 import getLibrary from "../getLibrary";
+import { makeStyles } from '@material-ui/core/styles';
 
 const App = ({ Component, pageProps }) => {
   const [darkMode, setDarkMode] = useState(0);
@@ -45,14 +46,14 @@ const App = ({ Component, pageProps }) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={muiTheme}>
         <Web3ReactProvider getLibrary={getLibrary}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <Header {...pageProps} darkMode={darkMode} toggleMode={toggleMode}/>
-            <Component {...pageProps} isMobile={isMobile} />
+            <ThemeProvider theme={muiTheme}>
+              <CssBaseline />
+              <Header {...pageProps} darkMode={darkMode} toggleMode={toggleMode}/>
+              <Component {...pageProps} isMobile={isMobile} />
+            </ThemeProvider>
         </Web3ReactProvider>
-      </ThemeProvider>
     </React.Fragment>
   );
 };
