@@ -13,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import IosSwitchMaterialUi from 'ios-switch-material-ui';
+import MenuIcon from "@material-ui/icons/Menu";
 import {
     Brightness4Outlined as ToggleDarkModeIcon,
 } from '@material-ui/icons/';
@@ -68,6 +69,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: "center",
     marginRight: "auto"
+  },
+  customText: {
+    textDecoration: 'none',
+    color: theme.type=='dark'?'white': 'black',
   }
 }));
 
@@ -82,37 +87,40 @@ export default function Header({ toggleMode, darkMode }) {
   const [open, setOpen] = useState(false);
   const triedToEagerConnect = useEagerConnect();
 
-
   return (
     <AppBar elevation={0}>
       <Container maxWidth={false}>
         <ToolBar disableGutters>
-        <Hidden mdUp>
-            <img src="/icons/menu.svg" onClick={() => setOpen(true)} className={styles.customMenu} />
-        </Hidden>
-                <div className={styles.layout}>
+            <Hidden mdUp>
+                <MenuIcon onClick={() => setOpen(true)} className={styles.customMenu} />
+            </Hidden>
+            <div className={styles.layout}>
+                <a
+                    href={'/'}
+                    className={styles.customText}
+                >
                     <div className={styles.title}>
                         <img src="/logo.png" alt="logo" className={styles.img} />
-
                         <Typography variant="h6">
                             Forward
                         </Typography>
                     </div>
-                    <Hidden mdDown>
-                        {navigationLinks.map((item) => (
-                        <Link
-                            className={styles.link}
-                            color="textPrimary"
-                            variant="button"
-                            underline="none"
-                            href={item.href}
-                            key={item.name}
-                        >
-                            {item.name}
-                        </Link>
-                        ))}
-                    </Hidden>
-                </div>
+                </a>
+                <Hidden mdDown>
+                    {navigationLinks.map((item) => (
+                    <Link
+                        className={styles.link}
+                        color="textPrimary"
+                        variant="button"
+                        underline="none"
+                        href={item.href}
+                        key={item.name}
+                    >
+                        {item.name}
+                    </Link>
+                    ))}
+                </Hidden>
+            </div>
                 <Hidden xsDown>
                     <Account triedToEagerConnect={triedToEagerConnect} />
                     {darkMode ? (
@@ -124,7 +132,7 @@ export default function Header({ toggleMode, darkMode }) {
                     colorKnobOnLeft="#5269d8"
                     onChange={toggleMode}/>
                 </Hidden>
-            </ToolBar>
+         </ToolBar>
         </Container>
         <SwipeableDrawer
             anchor="left"

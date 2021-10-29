@@ -6,9 +6,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { darkTheme, lightTheme } from '../src/utils/theme';
 import Header from '../src/components/Header';
-import { useWeb3React, Web3ReactProvider } from "@web3-react/core";
+import { Web3ReactProvider } from "@web3-react/core";
 import getLibrary from "../getLibrary";
-import useEagerConnect from "../hooks/useEagerConnect";
 
 const App = ({ Component, pageProps }) => {
   const [darkMode, setDarkMode] = useState(0);
@@ -46,15 +45,14 @@ const App = ({ Component, pageProps }) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={muiTheme}></ThemeProvider>
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <ThemeProvider theme={muiTheme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Header {...pageProps} darkMode={darkMode} toggleMode={toggleMode}/>
-          <Component {...pageProps} isMobile={isMobile} />
-        </ThemeProvider>
-      </Web3ReactProvider>
+      <ThemeProvider theme={muiTheme}>
+        <Web3ReactProvider getLibrary={getLibrary}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Header {...pageProps} darkMode={darkMode} toggleMode={toggleMode}/>
+            <Component {...pageProps} isMobile={isMobile} />
+        </Web3ReactProvider>
+      </ThemeProvider>
     </React.Fragment>
   );
 };
