@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: 0,
     },
+    [theme.breakpoints.down('sm')]: {
+      marginRight: 'auto',
+    },
   },
   img: {
     width: 30,
@@ -94,12 +97,14 @@ export default function Header({ toggleMode, darkMode }) {
             />
           </Hidden>
           <div className={styles.layout}>
-            <a href={'/'} className={styles.customText}>
-              <div className={styles.title}>
-                <img src="/logo.png" alt="logo" className={styles.img} />
-                <Typography variant="h6">Forward</Typography>
-              </div>
-            </a>
+            <Hidden xsDown>
+              <a href={'/'} className={styles.customText}>
+                <div className={styles.title}>
+                  <img src="/logo.png" alt="logo" className={styles.img} />
+                  <Typography variant="h6">Forward</Typography>
+                </div>
+              </a>
+            </Hidden>
             <Hidden mdDown>
               {navigationLinks.map((item) => (
                 <Link
@@ -133,6 +138,14 @@ export default function Header({ toggleMode, darkMode }) {
               colorKnobOnLeft="#5269d8"
               onChange={toggleMode}
             />
+          </Hidden>
+          <Hidden smUp>
+            <a href={'/'} className={styles.customText}>
+              <div className={styles.title}>
+                <img src="/logo.png" alt="logo" className={styles.img} />
+                <Typography variant="h6">Forward</Typography>
+              </div>
+            </a>
           </Hidden>
         </ToolBar>
       </Container>
