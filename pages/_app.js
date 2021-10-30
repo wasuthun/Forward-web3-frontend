@@ -6,8 +6,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { darkTheme, lightTheme } from '../src/utils/theme';
 import Header from '../src/components/Header';
-import { Web3ReactProvider } from "@web3-react/core";
-import getLibrary from "../getLibrary";
+import { Web3ReactProvider } from '@web3-react/core';
+import getLibrary from '../getLibrary';
 import { makeStyles } from '@material-ui/core/styles';
 
 const App = ({ Component, pageProps }) => {
@@ -46,14 +46,14 @@ const App = ({ Component, pageProps }) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-        <Web3ReactProvider getLibrary={getLibrary}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <ThemeProvider theme={muiTheme}>
-              <CssBaseline />
-              <Header {...pageProps} darkMode={darkMode} toggleMode={toggleMode}/>
-              <Component {...pageProps} isMobile={isMobile} />
-            </ThemeProvider>
-        </Web3ReactProvider>
+      <Web3ReactProvider getLibrary={getLibrary}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <ThemeProvider theme={muiTheme}>
+          <CssBaseline />
+          <Header {...pageProps} darkMode={darkMode} toggleMode={toggleMode} />
+          <Component {...pageProps} isMobile={isMobile} />
+        </ThemeProvider>
+      </Web3ReactProvider>
     </React.Fragment>
   );
 };

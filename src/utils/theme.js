@@ -71,22 +71,22 @@ const lightMuiTheme = createMuiTheme({
       },
     },
     MuiCssBaseline: {
-      "@global": {
+      '@global': {
         body: {
-          backgroundImage: "url(/img/background.png)",
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPositionY: 'bottom'
-        }
-      }
+          backgroundImage: 'url(/img/background.png)',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPositionY: 'bottom',
+        },
+      },
     },
     MuiInput: {
       input: {
-        "&::placeholder": {
-          color: "gray"
+        '&::placeholder': {
+          color: 'gray',
         },
-      }
-    }
+      },
+    },
   },
   custom: {
     fontFamily: {
@@ -169,23 +169,23 @@ const darkMuiTheme = createMuiTheme({
       },
     },
     MuiCssBaseline: {
-      "@global": {
+      '@global': {
         body: {
-          backgroundImage: "url(/img/background.png)",
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPositionY: 'bottom'
-        }
-      }
+          backgroundImage: 'url(/img/background.png)',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPositionY: 'bottom',
+        },
+      },
     },
     MuiInput: {
       input: {
-        "&::placeholder": {
-          color: "gray"
+        '&::placeholder': {
+          color: 'gray',
         },
-        color: "white", // if you also want to change the color of the input, this is the prop you'd use
-      }
-    }
+        color: 'white', // if you also want to change the color of the input, this is the prop you'd use
+      },
+    },
   },
   custom: {
     fontFamily: {
