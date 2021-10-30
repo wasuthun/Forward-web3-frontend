@@ -79,6 +79,13 @@ const lightMuiTheme = createMuiTheme({
           backgroundPositionY: 'bottom'
         }
       }
+    },
+    MuiInput: {
+      input: {
+        "&::placeholder": {
+          color: "gray"
+        },
+      }
     }
   },
   custom: {
@@ -169,6 +176,14 @@ const darkMuiTheme = createMuiTheme({
           backgroundRepeat: "no-repeat",
           backgroundPositionY: 'bottom'
         }
+      }
+    },
+    MuiInput: {
+      input: {
+        "&::placeholder": {
+          color: "gray"
+        },
+        color: "white", // if you also want to change the color of the input, this is the prop you'd use
       }
     }
   },

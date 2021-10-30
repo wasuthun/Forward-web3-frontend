@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
-import {colors, Grid} from '@material-ui/core';
+import { Grid, Modal, Container, TextField } from '@material-ui/core';
 
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,8 +10,21 @@ import { useWeb3React } from "@web3-react/core";
 
 const Index = () => {
   const classes = useStyles();
-  const voteContract = useContract('0x625B842dD04Cf4219A69e11D5781E3d1bfaA2895',VoteABI);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [inputText, setInput] = useState("")
+  const voteContract = useContract('0x3c45a8eb7afdfa5cf42c83c29d30d054a424baf6',VoteABI);
   const { account } = useWeb3React();
+  const handleChange = (event) => {
+    setInput(event.target.value);
+  };
+
+
+  // Can not call candidatesList from function because it require parameter of address
+  // useEffect(async()=>{
+  //   const data = await voteContract.candidates()
+  // },[])
 
   return (
     <main className={classes.main}>
@@ -20,66 +33,97 @@ const Index = () => {
         <div>
         <Typography className={classes.fontColor} variant="h3">Voting</Typography>
         <Grid className={classes.layout} container>
-        <Card className={classes.cardStyle} onClick={()=>{
-            voteContract.candidateRegis()
-            .then(()=>{
-              alert('regis success')
-            })
-            .catch((e)=>{
-              alert(e.data.message)
-            })
+        <Card className={classes.cardStyle} onClick={async ()=>{
+          try {
+            await voteContract.candidateRegis()
+            alert('regis success')
+          }
+          catch(e) {
+            alert(e.data.message)
+          }
           }}>
           <div className={classes.textInCard}>
             Regis
           </div>
         </Card>
-        <Card className={classes.cardStyle} onClick={()=>{
-          voteContract.startVoting()
-          .then(()=>{
+        <Card className={classes.cardStyle} onClick={async()=>{
+          try {
+            await voteContract.startVoting()
             alert('start voting success')
-          })
-          .catch((e)=>{
+          }
+          catch(e) {
             alert(e.data.message)
-          })
+          }
         }}>
           <div className={classes.textInCard}>
             Start
           </div>
         </Card>
-        <Card className={classes.cardStyle} o onClick={()=>{
-          voteContract.endVoting()
-          .then(()=>{
+        <Card className={classes.cardStyle} onClick={async()=>{
+          try {
+            await voteContract.endVoting()
             alert('end voting success')
-          })
-          .catch((e)=>{
+          }
+          catch(e) {
             alert(e.data.message)
-          })
+          }
         }}>
           <div className={classes.textInCard}>
             End
           </div>
         </Card>
-        <Card className={classes.cardStyle} o onClick={()=>{
-          voteContract.vote(account)
-          .then(()=>{
-            alert('voting success')
-          })
-          .catch((e)=>{
-            alert(e.data.message)
-          })
-        }}>
+        <Card 
+          className={classes.cardStyle} 
+          onClick={handleOpen}>
           <div className={classes.textInCard}>
             Vote
           </div>
         </Card>
-        <Card className={classes.cardStyle} onClick={()=>{
-          voteContract.getWinner()
-          .then(()=>{
-            alert('get winner')
-          })
-          .catch((e)=>{
+        <Modal
+          open={open}
+          onClose={handleClose}
+          // aria-labelledby="modal-modal-title"
+          // aria-describedby="modal-modal-description"
+        >
+          <Container className={classes.boxStyles}>
+            <Typography className={classes.fontColor} variant="h6" component="h2">
+              Please input candidate address
+            </Typography>
+            <TextField placeholder={'Input address'} className={classes.textFieldCustom} onChange={handleChange} />
+            <div className={classes.dpFlex}>
+              <button 
+                className={classes.customButton} 
+                onClick={async()=>{
+                  if (inputText.match(/^0x[a-fA-F0-9]{40}$/)) {
+                    const data = await voteContract.candidates(inputText)
+                    if(data[0]) {
+                      try {
+                        const result = await voteContract.vote(inputText)
+                        alert('success', result)
+                      }
+                      catch(e) {
+                        alert(e.data.message)
+                      }
+                    } else {
+
+                    }
+                  }else {
+                    alert("Input is not contract address")
+                  }               
+                }}>
+                Vote
+              </button>
+            </div>
+          </Container>
+        </Modal>
+        <Card className={classes.cardStyle} onClick={async()=>{
+          try {
+            await voteContract.getWinner()
+            alert('winner is '+ data)
+          }
+          catch(e) {
             alert(e.data.message)
-          })
+          }
         }}>
           <div className={classes.textInCard}>
             Result
@@ -136,6 +180,40 @@ const useStyles = makeStyles((theme) => ({
   },
   fontColor: {
     color: theme.type=='dark'? 'white': 'black'
+  },
+  boxStyles: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '320px',
+    backgroundColor: theme.type=='dark'? 'black': 'white',
+    paddingLeft: '15px',
+    paddingRight: '15px',
+    opacity: 0.8,
+    outline: 0,
+    borderRadius: '10px', // add / remove,
+    border: '0.1px solid',
+    borderColor: theme.type=='dark'? 'white': 'black',
+    paddingTop: '8px',
+    paddingBottom: '8px',
+    alignItems: 'center'
+    // border: '3px solid #000',
+  },
+  textFieldCustom: {
+    width: '100%',
+    color: theme.type=='dark'? 'white': 'black'
+  },
+  customButton: {
+    fontWeight: 'bold',
+    color: theme.type=='dark'? 'white': 'black',
+    backgroundColor: theme.type=='dark'? 'black': 'white',
+    borderRadius: '5px'
+  },
+  dpFlex:{
+    display:'flex',
+    justifyContent: 'center',
+    paddingTop: '8px'
   }
 }));
 
