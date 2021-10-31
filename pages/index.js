@@ -130,7 +130,7 @@ const Index = () => {
                                 duration: 5,
                                 type: 'success',
                               });
-                              setOpen(false)
+                              setOpen(false);
                             } catch (e) {
                               toast.notify(e.data.message, {
                                 duration: 5,
@@ -161,7 +161,7 @@ const Index = () => {
                 onClick={async () => {
                   try {
                     const data = await voteContract.getWinner();
-                    toast.notify('winner is ' +  shortenHex(data), {
+                    toast.notify('winner is ' + shortenHex(data), {
                       duration: 5,
                       type: 'success',
                     });
