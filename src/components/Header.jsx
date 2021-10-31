@@ -90,7 +90,7 @@ export default function Header({ toggleMode, darkMode }) {
     <AppBar style={{ background: darkMode ? 'white' : 'black' }} elevation={0}>
       <Container maxWidth={false}>
         <ToolBar disableGutters>
-          <Hidden mdUp>
+          <Hidden lgUp>
             <MenuIcon
               onClick={() => setOpen(true)}
               className={styles.customMenu}
