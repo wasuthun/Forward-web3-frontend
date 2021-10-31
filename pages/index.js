@@ -8,6 +8,7 @@ import useContract from '../hooks/useContract';
 import VoteABI from '../src/abi/VotingABI.json';
 import { voteContractAddress } from '../constant';
 import { useWeb3React } from '@web3-react/core';
+import { toast, ToastContainer } from 'react-nextjs-toast';
 
 const Index = () => {
   const classes = useStyles();
@@ -15,10 +16,7 @@ const Index = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [inputText, setInput] = useState('');
-  const voteContract = useContract(
-    voteContractAddress,
-    VoteABI,
-  );
+  const voteContract = useContract(voteContractAddress, VoteABI);
   const { account } = useWeb3React();
   const handleChange = (event) => {
     setInput(event.target.value);
@@ -31,6 +29,7 @@ const Index = () => {
 
   return (
     <main className={classes.main}>
+      <ToastContainer />
       <div className={classes.position}>
         {account ? (
           <div>
@@ -43,9 +42,15 @@ const Index = () => {
                 onClick={async () => {
                   try {
                     await voteContract.candidateRegis();
-                    alert('regis success');
+                    toast.notify('Regis success', {
+                      duration: 5,
+                      type: 'success',
+                    });
                   } catch (e) {
-                    alert(e.data.message);
+                    toast.notify(e.data.message, {
+                      duration: 5,
+                      type: 'error',
+                    });
                   }
                 }}
               >
@@ -56,9 +61,15 @@ const Index = () => {
                 onClick={async () => {
                   try {
                     await voteContract.startVoting();
-                    alert('start voting success');
+                    toast.notify('Start voting success', {
+                      duration: 5,
+                      type: 'success',
+                    });
                   } catch (e) {
-                    alert(e.data.message);
+                    toast.notify(e.data.message, {
+                      duration: 5,
+                      type: 'error',
+                    });
                   }
                 }}
               >
@@ -69,9 +80,15 @@ const Index = () => {
                 onClick={async () => {
                   try {
                     await voteContract.endVoting();
-                    alert('end voting success');
+                    toast.notify('End voting success', {
+                      duration: 5,
+                      type: 'success',
+                    });
                   } catch (e) {
-                    alert(e.data.message);
+                    toast.notify(e.data.message, {
+                      duration: 5,
+                      type: 'error',
+                    });
                   }
                 }}
               >
@@ -108,14 +125,27 @@ const Index = () => {
                           if (data[0]) {
                             try {
                               const result = await voteContract.vote(inputText);
-                              alert('success', result);
+                              toast.notify('Success vote' + result, {
+                                duration: 5,
+                                type: 'success',
+                              });
                             } catch (e) {
-                              alert(e.data.message);
+                              toast.notify(e.data.message, {
+                                duration: 5,
+                                type: 'error',
+                              });
                             }
                           } else {
+                            toast.notify('Input address is not candidate', {
+                              duration: 5,
+                              type: 'error',
+                            });
                           }
                         } else {
-                          alert('Input is not contract address');
+                          toast.notify('Input is not contract address', {
+                            duration: 5,
+                            type: 'error',
+                          });
                         }
                       }}
                     >
@@ -129,9 +159,15 @@ const Index = () => {
                 onClick={async () => {
                   try {
                     await voteContract.getWinner();
-                    alert('winner is ' + data);
+                    toast.notify('winner is ' + data, {
+                      duration: 5,
+                      type: 'success',
+                    });
                   } catch (e) {
-                    alert(e.data.message);
+                    toast.notify(e.data.message, {
+                      duration: 5,
+                      type: 'error',
+                    });
                   }
                 }}
               >
