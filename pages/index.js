@@ -9,6 +9,7 @@ import VoteABI from '../src/abi/VotingABI.json';
 import { voteContractAddress } from '../constant';
 import { useWeb3React } from '@web3-react/core';
 import { toast, ToastContainer } from 'react-nextjs-toast';
+import { shortenHex } from '../util';
 
 const Index = () => {
   const classes = useStyles();
@@ -124,11 +125,12 @@ const Index = () => {
                           const data = await voteContract.candidates(inputText);
                           if (data[0]) {
                             try {
-                              const result = await voteContract.vote(inputText);
-                              toast.notify('Success vote' + result, {
+                              await voteContract.vote(inputText);
+                              toast.notify('Success vote', {
                                 duration: 5,
                                 type: 'success',
                               });
+                              setOpen(false)
                             } catch (e) {
                               toast.notify(e.data.message, {
                                 duration: 5,
@@ -158,8 +160,8 @@ const Index = () => {
                 className={classes.cardStyle}
                 onClick={async () => {
                   try {
-                    await voteContract.getWinner();
-                    toast.notify('winner is ' + data, {
+                    const data = await voteContract.getWinner();
+                    toast.notify('winner is ' +  shortenHex(data), {
                       duration: 5,
                       type: 'success',
                     });

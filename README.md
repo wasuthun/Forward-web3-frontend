@@ -1,7 +1,7 @@
 Assignment Front-end
 ## Getting started
 
-After clone project
+After clone project:
 ```
 yarn
 ```
