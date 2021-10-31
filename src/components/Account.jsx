@@ -8,6 +8,7 @@ import { formatEtherscanLink, shortenHex } from '../../util';
 import { makeStyles } from '@material-ui/core/styles';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { parseBalance } from '../../util';
+import { busdContractAddress } from '../../constant';
 
 const Account = ({ triedToEagerConnect }) => {
   const {
@@ -23,7 +24,7 @@ const Account = ({ triedToEagerConnect }) => {
   const [balance, setBalance] = useState(0);
   const { data } = useTokenBalance(
     account,
-    '0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee',
+    busdContractAddress,
   );
 
   const {

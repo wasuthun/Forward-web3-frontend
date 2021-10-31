@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import useContract from '../hooks/useContract';
 import VoteABI from '../src/abi/VotingABI.json';
+import { voteContractAddress } from '../constant';
 import { useWeb3React } from '@web3-react/core';
 
 const Index = () => {
@@ -15,7 +16,7 @@ const Index = () => {
   const handleClose = () => setOpen(false);
   const [inputText, setInput] = useState('');
   const voteContract = useContract(
-    '0x3c45a8eb7afdfa5cf42c83c29d30d054a424baf6',
+    voteContractAddress,
     VoteABI,
   );
   const { account } = useWeb3React();
