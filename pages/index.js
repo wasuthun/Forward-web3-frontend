@@ -210,12 +210,19 @@ const useStyles = makeStyles((theme) => ({
       background: 'pink',
     },
     borderColor: theme.type == 'dark' ? 'white' : 'black',
+    [theme.breakpoints.down('sm')]: {
+      width: '100px',
+      height: '150px'
+    }
   },
   textInCard: {
     fontSize: '24px',
     fontWeight: 'bold',
     marginTop: '130px',
     color: theme.type == 'dark' ? 'white' : 'black',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '65px'
+    }
   },
   layout: {
     marginTop: '20px',
