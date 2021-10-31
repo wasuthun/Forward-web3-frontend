@@ -221,7 +221,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '130px',
     color: theme.type == 'dark' ? 'white' : 'black',
     [theme.breakpoints.down('sm')]: {
-      marginTop: '65px'
+      marginTop: '60px'
     }
   },
   layout: {
